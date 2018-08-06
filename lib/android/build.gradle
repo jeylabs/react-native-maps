@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 apply from: 'gradle-maven-push.gradle'
 
+def _ext = rootProject.ext
+
+def _reactNativeVersion = _ext.has('reactNative') ? _ext.reactNative : '+'
 def DEFAULT_COMPILE_SDK_VERSION             = 25
 def DEFAULT_BUILD_TOOLS_VERSION             = "25.0.3"
 def DEFAULT_TARGET_SDK_VERSION              = 25
@@ -43,8 +46,9 @@ dependencies {
   def googlePlayServicesVersion = rootProject.hasProperty('googlePlayServicesVersion')  ? rootProject.googlePlayServicesVersion : DEFAULT_GOOGLE_PLAY_SERVICES_VERSION
   def androidMapsUtilsVersion   = rootProject.hasProperty('androidMapsUtilsVersion')    ? rootProject.androidMapsUtilsVersion   : DEFAULT_ANDROID_MAPS_UTILS_VERSION
 
-  compileOnly "com.facebook.react:react-native:+"
-  implementation "com.google.android.gms:play-services-base:$googlePlayServicesVersion"
-  implementation "com.google.android.gms:play-services-maps:$googlePlayServicesVersion"
-  implementation "com.google.maps.android:android-maps-utils:$androidMapsUtilsVersion"
+  //compileOnly "com.facebook.react:react-native:+"
+  compile "com.facebook.react:react-native:${_reactNativeVersion}"
+  compile "com.google.android.gms:play-services-base:$googlePlayServicesVersion"
+  compile "com.google.android.gms:play-services-maps:$googlePlayServicesVersion"
+  compile "com.google.maps.android:android-maps-utils:$androidMapsUtilsVersion"
 }
